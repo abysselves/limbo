@@ -15,14 +15,12 @@ https://github.com/limboemu/limbo
 
     Android SDK
     Android NDK: r14b/gcc or r23b/clang
-    Android Studio (3.1.1 preferred)
-    Android device with Android OS 8.0 (Oreo) and above
+    Android Studio (Giraffe or newer)
+    Android device with Android OS 15 (API 34) and above
     Linux Desktop pc (Ubuntu preferred)
-    Make sure you have the following packages installed, if not run:
-    sudo apt-get install make autoconf automake git python binutils 
-    sudo apt-get install libtool-bin pkg-config flex bison gettext texinfo rsync
-    For development you can use your own editors Geany is highly
-	recommended for editing the native code
+    Run ./scripts/setup_env.sh to install the required build packages automatically.
+    For development you can use your own editors. Geany is highly
+        recommended for editing the native code
 
 ===============================================================================
 
@@ -51,8 +49,12 @@ https://github.com/limboemu/limbo
 
     ##### Get QEMU
     # download link:  http://download.qemu-project.org/qemu-x.x.x.tar.xz 
-    # Current versions supported by limbo: 5.1.0 and 2.9.1
-    # example for version 5.1.0:
+    # Current versions supported by limbo: 10.0.2, 5.1.0 and 2.9.1
+    # example for version 10.0.2:
+    wget http://download.qemu-project.org/qemu-10.0.2.tar.xz -P /tmp/
+    tar -xJf /tmp/qemu-10.0.2.tar.xz
+    mv qemu-10.0.2 qemu
+    # For QEMU version 5.1.0:
     wget http://download.qemu-project.org/qemu-5.1.0.tar.xz -P /tmp/
     tar -xJf /tmp/qemu-5.1.0.tar.xz
     mv qemu-5.1.0 qemu
@@ -98,8 +100,10 @@ https://github.com/limboemu/limbo
 6. Apply patches
 
     ### Apply patch for QEMU:
-    # example for 5.1.0:
     cd ./limbo-android-lib/src/main/jni/qemu/
+    # example for 10.0.2:
+    patch -p1 < ../patches/qemu-10.0.2.patch
+    # for 5.1.0:
     patch -p1 < ../patches/qemu-5.1.0.patch
     # for 2.9.1:
     patch -p1 < ../patches/qemu-2.9.1.patch
